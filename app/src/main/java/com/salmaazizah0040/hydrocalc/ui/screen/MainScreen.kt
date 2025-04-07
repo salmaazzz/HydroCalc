@@ -15,13 +15,20 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
+import androidx.compose.material.icons.filled.Info
+import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.material.icons.filled.Share
+import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.Button
+import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.MenuAnchorType
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Scaffold
@@ -49,11 +56,56 @@ import com.salmaazizah0040.hydrocalc.ui.theme.HydroCalcTheme
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScreen() {
+
+    var showMenu by remember { mutableStateOf(false) }
+
     Scaffold(
         topBar = {
             TopAppBar(
                 title = {
                     Text(text = stringResource(id = R.string.app_name))
+                },
+                actions = {
+                    IconButton(onClick = { showMenu = true }) {
+                        Icon(imageVector = Icons.Default.MoreVert, contentDescription = stringResource(R.string.menu))
+                    }
+                    DropdownMenu(
+                        expanded = showMenu,
+                        onDismissRequest = { showMenu = false }
+                    ) {
+                        DropdownMenuItem(
+                            text = {
+                                Row(verticalAlignment = Alignment.CenterVertically) {
+                                    Icon(
+                                        imageVector = Icons.Default.Info,
+                                        contentDescription = null,
+                                        tint = MaterialTheme.colorScheme.primary
+                                    )
+                                    Text(
+                                        text = stringResource(R.string.tentang),
+                                        modifier = Modifier.padding(start = 8.dp)
+                                    )
+                                }
+                            },
+                            onClick = { showMenu = false }
+                        )
+                        DropdownMenuItem(
+                            text = {
+                                Row(verticalAlignment = Alignment.CenterVertically) {
+                                    Icon(
+                                        imageVector = Icons.Default.Share,
+                                        contentDescription = null,
+                                        tint = MaterialTheme.colorScheme.primary
+                                    )
+                                    Text(
+                                        text = stringResource(R.string.bagikan),
+                                        modifier = Modifier.padding(start = 8.dp)
+                                    )
+                                }
+                            },
+                            onClick = { showMenu = false },
+                        )
+                    }
                 },
                 colors = TopAppBarDefaults.mediumTopAppBarColors(
                     containerColor = MaterialTheme.colorScheme.primaryContainer,
@@ -70,6 +122,7 @@ fun MainScreen() {
 @Composable
 fun ScreenContent(modifier: Modifier = Modifier) {
     var berat by remember { mutableStateOf("") }
+    var beratError by remember { mutableStateOf(false) }
 
     val radioOptions = listOf(
         stringResource(id = R.string.pria),
@@ -78,31 +131,34 @@ fun ScreenContent(modifier: Modifier = Modifier) {
     var gender by remember { mutableStateOf(radioOptions[0]) }
 
     var usia by remember { mutableStateOf("") }
+    var usiaError by remember { mutableStateOf(false) }
     var expanded by remember { mutableStateOf(false) }
     val usiaOptions = listOf(
         stringResource(id = R.string.rentang1),
         stringResource(id = R.string.rentang2),
         stringResource(id = R.string.rentang3),
         stringResource(id = R.string.rentang4),
-        stringResource(id = R.string.rentang5)
+        stringResource(id = R.string.rentang5),
+        stringResource(id = R.string.rentang6),
+        stringResource(id = R.string.rentang7),
+        stringResource(id = R.string.rentang8)
     )
-
     var aktivitas by remember { mutableStateOf("") }
+    var aktivitasError by remember { mutableStateOf(false) }
     var expandedAktivitas by remember { mutableStateOf(false) }
     val aktivitasOptions = listOf(
         stringResource(id = R.string.ringan),
         stringResource(id = R.string.sedang),
         stringResource(id = R.string.berat)
     )
-
     var cuaca by remember { mutableStateOf("") }
+    var cuacaError by remember { mutableStateOf(false) }
     var expandedCuaca by remember { mutableStateOf(false) }
     val cuacaOptions = listOf(
         stringResource(id = R.string.panas),
         stringResource(id = R.string.normal),
         stringResource(id = R.string.dingin)
     )
-
     var kebutuhanAir by remember { mutableIntStateOf(0) }
 
     Column(
@@ -119,9 +175,14 @@ fun ScreenContent(modifier: Modifier = Modifier) {
         )
         OutlinedTextField(
             value = berat,
-            onValueChange = { berat = it },
+            onValueChange = {
+                berat = it
+                beratError = it.isBlank()
+                            },
             label = { Text(text = stringResource(R.string.berat_badan)) },
-            trailingIcon = { Text(text = "kg") },
+            trailingIcon = { IconPicker(beratError, "kg") },
+            supportingText = { ErrorHint(beratError) },
+            isError = beratError,
             singleLine = true,
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.Number,
@@ -132,6 +193,7 @@ fun ScreenContent(modifier: Modifier = Modifier) {
         Row(
             modifier = Modifier
                 .padding(top = 6.dp)
+                .padding(bottom = 16.dp)
                 .border(1.dp, Color.Gray, RoundedCornerShape(4.dp))
         ) {
             radioOptions.forEach { text ->
@@ -158,11 +220,19 @@ fun ScreenContent(modifier: Modifier = Modifier) {
                 value = usia,
                 onValueChange = {},
                 readOnly = true,
+                isError = usiaError,
                 label = { Text(stringResource(R.string.usia)) },
                 trailingIcon = {
                     Icon(Icons.Filled.ArrowDropDown, contentDescription = "Dropdown")
                 },
-                modifier = Modifier.menuAnchor().fillMaxWidth()
+                modifier = Modifier
+                    .menuAnchor(MenuAnchorType.PrimaryNotEditable)
+                    .fillMaxWidth(),
+                supportingText = {
+                    if (usiaError) {
+                        Text("Usia belum dipilih.", color = MaterialTheme.colorScheme.error)
+                    }
+                }
             )
             ExposedDropdownMenu(
                 expanded = expanded,
@@ -173,6 +243,7 @@ fun ScreenContent(modifier: Modifier = Modifier) {
                         text = { Text(option) },
                         onClick = {
                             usia = option
+                            usiaError = false
                             expanded = false
                         }
                     )
@@ -188,11 +259,19 @@ fun ScreenContent(modifier: Modifier = Modifier) {
                 value = aktivitas,
                 onValueChange = {},
                 readOnly = true,
+                isError = aktivitasError,
                 label = { Text(stringResource(R.string.aktivitas_fisik)) },
                 trailingIcon = {
                     Icon(Icons.Filled.ArrowDropDown, contentDescription = "Dropdown")
                 },
-                modifier = Modifier.menuAnchor().fillMaxWidth()
+                modifier = Modifier
+                    .menuAnchor(MenuAnchorType.PrimaryNotEditable)
+                    .fillMaxWidth(),
+                supportingText = {
+                    if (aktivitasError) {
+                        Text("Aktivitas belum dipilih.", color = MaterialTheme.colorScheme.error)
+                    }
+                }
             )
             ExposedDropdownMenu(
                 expanded = expandedAktivitas,
@@ -203,6 +282,7 @@ fun ScreenContent(modifier: Modifier = Modifier) {
                         text = { Text(option) },
                         onClick = {
                             aktivitas = option
+                            aktivitasError = false
                             expandedAktivitas = false
                         }
                     )
@@ -218,11 +298,19 @@ fun ScreenContent(modifier: Modifier = Modifier) {
                 value = cuaca,
                 onValueChange = {},
                 readOnly = true,
+                isError = cuacaError,
                 label = { Text(stringResource(R.string.cuaca)) },
                 trailingIcon = {
                     Icon(Icons.Filled.ArrowDropDown, contentDescription = "Dropdown")
                 },
-                modifier = Modifier.menuAnchor().fillMaxWidth()
+                modifier = Modifier
+                    .menuAnchor(MenuAnchorType.PrimaryNotEditable)
+                    .fillMaxWidth(),
+                supportingText = {
+                    if (cuacaError) {
+                        Text("Cuaca belum dipilih.", color = MaterialTheme.colorScheme.error)
+                    }
+                }
             )
             ExposedDropdownMenu(
                 expanded = expandedCuaca,
@@ -233,6 +321,7 @@ fun ScreenContent(modifier: Modifier = Modifier) {
                         text = { Text(option) },
                         onClick = {
                             cuaca = option
+                            cuacaError = false
                             expandedCuaca = false
                         }
                     )
@@ -241,9 +330,17 @@ fun ScreenContent(modifier: Modifier = Modifier) {
         }
         Button(
             onClick = {
-                val beratFloat = berat.toFloatOrNull() ?: 0f
+                beratError = (berat == "" || berat == "0")
+                usiaError = usia.isBlank()
+                aktivitasError = aktivitas.isBlank()
+                cuacaError = cuaca.isBlank()
+
+                if (beratError || usiaError || aktivitasError || cuacaError) return@Button
+
+                val beratInt = berat.toIntOrNull() ?: 0
+
                 kebutuhanAir = hitungKebutuhanAir(
-                    beratFloat,
+                    beratInt,
                     gender,
                     usia,
                     aktivitas,
@@ -289,7 +386,7 @@ fun GenderOption(label: String, isSelected: Boolean, modifier: Modifier) {
 }
 
 fun hitungKebutuhanAir(
-    berat: Float,
+    berat: Int,
     gender: String,
     usia: String,
     aktivitas: String,
@@ -301,9 +398,16 @@ fun hitungKebutuhanAir(
         "4-8 tahun" -> 1400f
         "9-13 tahun" -> if (gender == "Pria") 2200f else 1800f
         "14-18 tahun" -> if (gender == "Pria") 2700f else 2000f
-        "19 tahun ke atas" -> berat * 30f
+        "19-29 tahun", "30-49 tahun" -> if (gender == "Pria") 2500f else 2350f
+        "50-64 tahun" -> if (gender == "Pria") 2500f else 2300f
+        "65 tahun ke atas" -> if (gender == "Pria") 2100f else 1900f
         else -> 0f
     }
+
+    // Penyesuaian berat badan → anggap ideal 60kg
+    val beratIdeal = 60f
+    val rasioBerat = berat.toFloat() / beratIdeal
+    kebutuhan *= rasioBerat.coerceIn(0.8f, 1.4f)
 
     // penyesuaian aktivitas fisik
     kebutuhan *= when (aktivitas) {
@@ -314,7 +418,7 @@ fun hitungKebutuhanAir(
     }
 
     // penyesuaian cuaca
-    kebutuhan += when (cuaca) {
+    kebutuhan *= when (cuaca) {
         "Dingin" -> 0.95f
         "Normal" -> 1.0f
         "Panas" -> 1.10f
@@ -322,6 +426,22 @@ fun hitungKebutuhanAir(
     }
 
     return kebutuhan.toInt()
+}
+
+@Composable
+fun IconPicker(isError: Boolean, unit: String) {
+    if (isError) {
+        Icon(imageVector = Icons.Filled.Warning, contentDescription = null)
+    } else {
+        Text(text = unit)
+    }
+}
+
+@Composable
+fun ErrorHint(isError: Boolean) {
+    if (isError) {
+        Text(text = stringResource(R.string.input_invalid))
+    }
 }
 
 @Preview(showBackground = true)
