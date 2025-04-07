@@ -12,7 +12,10 @@
     <string name="rentang2">4-8 tahun</string>
     <string name="rentang3">9-13 tahun</string>
     <string name="rentang4">14-18 tahun</string>
-    <string name="rentang5">19 tahun ke atas</string>
+    <string name="rentang5">19-29 tahun</string>
+    <string name="rentang6">30-49 tahun</string>
+    <string name="rentang7">50-64 tahun</string>
+    <string name="rentang8">65 tahun ke atas</string>
     <string name="ringan">Ringan</string>
     <string name="sedang">Sedang</string>
     <string name="berat">Berat</string>
@@ -21,8 +24,9 @@
     <string name="dingin">Dingin</string>
     <string name="hitung">Hitung</string>
 
-    <string name="bmi_x">BMI: %1$.2f</string>
-    <string name="kurus">Kurus</string>
-    <string name="ideal">Ideal</string>
-    <string name="gemuk">Gemuk</string>
+    <string name="input_invalid">Tidak boleh kosong.</string>
+
+    <string name="menu">Menu</string>
+    <string name="bagikan">Bagikan</string>
+    <string name="tentang">Tentang</string>
 </resources>
