@@ -51,12 +51,15 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.salmaazizah0040.hydrocalc.R
+import com.salmaazizah0040.hydrocalc.navigation.Screen
 import com.salmaazizah0040.hydrocalc.ui.theme.HydroCalcTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainScreen() {
+fun MainScreen(navController: NavController) {
 
     var showMenu by remember { mutableStateOf(false) }
 
@@ -88,7 +91,10 @@ fun MainScreen() {
                                     )
                                 }
                             },
-                            onClick = { showMenu = false }
+                            onClick = {
+                                showMenu = false
+                                navController.navigate(Screen.About.route)
+                            }
                         )
                         DropdownMenuItem(
                             text = {
@@ -450,6 +456,6 @@ fun ErrorHint(isError: Boolean) {
 @Composable
 fun MainScreenPreview() {
     HydroCalcTheme {
-        MainScreen()
+        MainScreen(rememberNavController())
     }
 }
