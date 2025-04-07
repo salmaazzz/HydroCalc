@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import com.salmaazizah0040.hydrocalc.ui.screen.App
+import com.salmaazizah0040.hydrocalc.navigation.SetupNavGraph
 import com.salmaazizah0040.hydrocalc.ui.theme.HydroCalcTheme
 
 class MainActivity : ComponentActivity() {
@@ -14,7 +14,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             HydroCalcTheme {
-                App()
+                SetupNavGraph()
             }
         }
     }
