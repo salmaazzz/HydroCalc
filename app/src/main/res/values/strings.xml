@@ -28,5 +28,9 @@
 
     <string name="menu">Menu</string>
     <string name="bagikan">Bagikan</string>
-    <string name="tentang">Tentang</string>
+    <string name="tentang_aplikasi">Tentang Aplikasi</string>
+    <string name="copyright">HydroCalc adalah aplikasi sederhana yang membantu kamu menghitung kebutuhan air minum harian berdasarkan data pribadi seperti
+        berat badan dan aktivitas fisik. Dengan tampilan antarmuka yang ringan dan mudah digunakan, HydroCalc dirancang untuk meningkatkan kesadaran pentingnya
+        hidrasi demi kesehatan tubuh.\n\nAplikasi ini dikembangkan sebagai bagian dari bagian dari mini project mata kuliah Pemrograman untuk Perangkat Bergerak 1.
+        \n\nCopyright © 2025 HydroCalc - Salma Azizah.\nAll rights reserved.</string>
 </resources>

@@ -1,5 +1,6 @@
 package com.salmaazizah0040.hydrocalc.ui.screen
 
+import android.content.res.Configuration
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -82,7 +83,7 @@ fun MainScreen() {
                                         tint = MaterialTheme.colorScheme.primary
                                     )
                                     Text(
-                                        text = stringResource(R.string.tentang),
+                                        text = stringResource(R.string.tentang_aplikasi),
                                         modifier = Modifier.padding(start = 8.dp)
                                     )
                                 }
@@ -445,6 +446,7 @@ fun ErrorHint(isError: Boolean) {
 }
 
 @Preview(showBackground = true)
+@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES, showBackground = true)
 @Composable
 fun MainScreenPreview() {
     HydroCalcTheme {

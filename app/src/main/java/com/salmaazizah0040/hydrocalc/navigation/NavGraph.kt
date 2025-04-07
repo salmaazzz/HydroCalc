@@ -5,6 +5,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.salmaazizah0040.hydrocalc.ui.screen.AboutScreen
 import com.salmaazizah0040.hydrocalc.ui.screen.MainScreen
 import com.salmaazizah0040.hydrocalc.ui.screen.SplashScreen
 
@@ -19,6 +20,9 @@ fun SetupNavGraph(navController: NavHostController = rememberNavController()) {
         }
         composable(route = Screen.Home.route) {
             MainScreen()
+        }
+        composable(route = Screen.About.route) {
+            AboutScreen()
         }
     }
 }
