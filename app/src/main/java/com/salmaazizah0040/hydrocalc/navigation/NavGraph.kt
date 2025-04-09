@@ -8,6 +8,7 @@ import androidx.navigation.compose.rememberNavController
 import com.salmaazizah0040.hydrocalc.ui.screen.AboutScreen
 import com.salmaazizah0040.hydrocalc.ui.screen.MainScreen
 import com.salmaazizah0040.hydrocalc.ui.screen.SplashScreen
+import com.salmaazizah0040.hydrocalc.ui.screen.TipsScreen
 
 @Composable
 fun SetupNavGraph(navController: NavHostController = rememberNavController(),
@@ -26,6 +27,9 @@ fun SetupNavGraph(navController: NavHostController = rememberNavController(),
         }
         composable(route = Screen.About.route) {
             AboutScreen(navController)
+        }
+        composable(Screen.Tips.route) {
+            TipsScreen(navController)
         }
     }
 }

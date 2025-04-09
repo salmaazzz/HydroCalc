@@ -1,5 +1,7 @@
 package com.salmaazizah0040.hydrocalc.ui.screen
 
+import android.content.Context
+import android.content.Intent
 import android.content.res.Configuration
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -21,6 +23,7 @@ import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.DarkMode
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.LightMode
+import androidx.compose.material.icons.filled.Lightbulb
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.Button
@@ -50,6 +53,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.input.ImeAction
@@ -80,7 +84,11 @@ fun MainScreen(
                 },
                 actions = {
                     IconButton(onClick = { showMenu = true }) {
-                        Icon(imageVector = Icons.Default.MoreVert, contentDescription = stringResource(R.string.menu))
+                        Icon(
+                            imageVector = Icons.Default.MoreVert,
+                            contentDescription = stringResource(R.string.menu),
+                            tint = MaterialTheme.colorScheme.primary
+                        )
                     }
                     DropdownMenu(
                         expanded = showMenu,
@@ -107,6 +115,25 @@ fun MainScreen(
                             onClick = {
                                 onToggleTheme()
                                 showMenu = false
+                            }
+                        )
+                        DropdownMenuItem(
+                            text = {
+                                Row(verticalAlignment = Alignment.CenterVertically) {
+                                    Icon(
+                                        imageVector = Icons.Default.Lightbulb,
+                                        contentDescription = null,
+                                        tint = MaterialTheme.colorScheme.primary
+                                    )
+                                    Text(
+                                        text = stringResource(R.string.tips_hidup_sehat),
+                                        modifier = Modifier.padding(start = 8.dp)
+                                    )
+                                }
+                            },
+                            onClick = {
+                                showMenu = false
+                                navController.navigate(Screen.Tips.route)
                             }
                         )
                         DropdownMenuItem(
@@ -183,6 +210,8 @@ fun ScreenContent(modifier: Modifier = Modifier) {
         stringResource(id = R.string.dingin)
     )
     var kebutuhanAir by rememberSaveable { mutableIntStateOf(0) }
+
+    val context = LocalContext.current
 
     Column(
         modifier = modifier
@@ -412,21 +441,37 @@ fun ScreenContent(modifier: Modifier = Modifier) {
                 modifier = Modifier.fillMaxWidth(),
                 thickness = 1.dp
             )
-
             Text(
                 text = "Kebutuhan air minum Anda adalah:",
                 style = MaterialTheme.typography.titleMedium,
                 modifier = Modifier.padding(top = 12.dp)
             )
-
             Text(
                 text = "$kebutuhanAir ml per hari",
                 style = MaterialTheme.typography.headlineLarge,
                 modifier = Modifier.padding(top = 8.dp)
             )
+            Button(
+                onClick = {
+                    shareDate(
+                        context = context,
+                        message = context.getString(
+                            R.string.bagikan_template,
+                            berat,
+                            gender,
+                            usia,
+                            aktivitas,
+                            cuaca,
+                            kebutuhanAir
+                        )
+                    )
+                },
+                modifier = Modifier.padding(top = 8.dp),
+                contentPadding = PaddingValues(horizontal = 32.dp, vertical = 16.dp)
+            ) {
+                Text(text = stringResource(R.string.bagikan))
+            }
         }
-
-
     }
 }
 
@@ -486,6 +531,16 @@ fun hitungKebutuhanAir(
     }
 
     return kebutuhan.toInt()
+}
+
+private fun shareDate(context: Context, message: String) {
+    val shareIntent = Intent(Intent.ACTION_SEND).apply {
+        type = "text/plain"
+        putExtra(Intent.EXTRA_TEXT, message)
+    }
+    if (shareIntent.resolveActivity(context.packageManager) != null) {
+        context.startActivity(shareIntent)
+    }
 }
 
 @Composable
