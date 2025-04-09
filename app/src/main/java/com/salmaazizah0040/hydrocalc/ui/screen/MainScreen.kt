@@ -45,6 +45,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -143,18 +144,18 @@ fun MainScreen(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ScreenContent(modifier: Modifier = Modifier) {
-    var berat by remember { mutableStateOf("") }
-    var beratError by remember { mutableStateOf(false) }
+    var berat by rememberSaveable { mutableStateOf("") }
+    var beratError by rememberSaveable { mutableStateOf(false) }
 
     val radioOptions = listOf(
         stringResource(id = R.string.pria),
         stringResource(id = R.string.wanita)
     )
-    var gender by remember { mutableStateOf(radioOptions[0]) }
+    var gender by rememberSaveable { mutableStateOf(radioOptions[0]) }
 
-    var usia by remember { mutableStateOf("") }
-    var usiaError by remember { mutableStateOf(false) }
-    var expanded by remember { mutableStateOf(false) }
+    var usia by rememberSaveable { mutableStateOf("") }
+    var usiaError by rememberSaveable { mutableStateOf(false) }
+    var expanded by rememberSaveable { mutableStateOf(false) }
     val usiaOptions = listOf(
         stringResource(id = R.string.rentang1),
         stringResource(id = R.string.rentang2),
@@ -165,23 +166,23 @@ fun ScreenContent(modifier: Modifier = Modifier) {
         stringResource(id = R.string.rentang7),
         stringResource(id = R.string.rentang8)
     )
-    var aktivitas by remember { mutableStateOf("") }
-    var aktivitasError by remember { mutableStateOf(false) }
-    var expandedAktivitas by remember { mutableStateOf(false) }
+    var aktivitas by rememberSaveable { mutableStateOf("") }
+    var aktivitasError by rememberSaveable { mutableStateOf(false) }
+    var expandedAktivitas by rememberSaveable { mutableStateOf(false) }
     val aktivitasOptions = listOf(
         stringResource(id = R.string.ringan),
         stringResource(id = R.string.sedang),
         stringResource(id = R.string.berat)
     )
-    var cuaca by remember { mutableStateOf("") }
-    var cuacaError by remember { mutableStateOf(false) }
-    var expandedCuaca by remember { mutableStateOf(false) }
+    var cuaca by rememberSaveable { mutableStateOf("") }
+    var cuacaError by rememberSaveable { mutableStateOf(false) }
+    var expandedCuaca by rememberSaveable { mutableStateOf(false) }
     val cuacaOptions = listOf(
         stringResource(id = R.string.panas),
         stringResource(id = R.string.normal),
         stringResource(id = R.string.dingin)
     )
-    var kebutuhanAir by remember { mutableIntStateOf(0) }
+    var kebutuhanAir by rememberSaveable { mutableIntStateOf(0) }
 
     Column(
         modifier = modifier
