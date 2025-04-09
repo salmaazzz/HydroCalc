@@ -9,14 +9,14 @@
     <string name="pria">Pria</string>
     <string name="wanita">Wanita</string>
 
-    <string name="rentang1">1-3 tahun</string>
-    <string name="rentang2">4-8 tahun</string>
-    <string name="rentang3">9-13 tahun</string>
-    <string name="rentang4">14-18 tahun</string>
-    <string name="rentang5">19-29 tahun</string>
-    <string name="rentang6">30-49 tahun</string>
-    <string name="rentang7">50-64 tahun</string>
-    <string name="rentang8">65 tahun ke atas</string>
+    <string name="rentang1" tools:ignore="TypographyDashes">1-3 tahun</string>
+    <string name="rentang2" tools:ignore="TypographyDashes">4-8 tahun</string>
+    <string name="rentang3" tools:ignore="TypographyDashes">9-13 tahun</string>
+    <string name="rentang4" tools:ignore="TypographyDashes">14-18 tahun</string>
+    <string name="rentang5" tools:ignore="TypographyDashes">19-29 tahun</string>
+    <string name="rentang6" tools:ignore="TypographyDashes">30-49 tahun</string>
+    <string name="rentang7" tools:ignore="TypographyDashes">50-64 tahun</string>
+    <string name="rentang8" tools:ignore="TypographyDashes">65 tahun ke atas</string>
 
     <string name="ringan">Ringan</string>
     <string name="sedang">Sedang</string>
