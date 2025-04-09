@@ -6,8 +6,10 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.selection.selectable
@@ -16,11 +18,13 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
+import androidx.compose.material.icons.filled.DarkMode
 import androidx.compose.material.icons.filled.Info
+import androidx.compose.material.icons.filled.LightMode
 import androidx.compose.material.icons.filled.MoreVert
-import androidx.compose.material.icons.filled.Share
 import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -59,7 +63,11 @@ import com.salmaazizah0040.hydrocalc.ui.theme.HydroCalcTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainScreen(navController: NavController) {
+fun MainScreen(
+    navController: NavController,
+    isDarkTheme: Boolean,
+    onToggleTheme: () -> Unit
+    ) {
 
     var showMenu by remember { mutableStateOf(false) }
 
@@ -81,6 +89,29 @@ fun MainScreen(navController: NavController) {
                             text = {
                                 Row(verticalAlignment = Alignment.CenterVertically) {
                                     Icon(
+                                        imageVector = if (isDarkTheme) Icons.Filled.LightMode else Icons.Filled.DarkMode,
+                                        contentDescription = null,
+                                        tint = MaterialTheme.colorScheme.primary
+                                    )
+                                    Text(
+                                        text = if (isDarkTheme) {
+                                            stringResource(R.string.mode_terang)
+                                        } else {
+                                            stringResource(R.string.mode_gelap)
+                                        },
+                                        modifier = Modifier.padding(start = 8.dp)
+                                    )
+                                }
+                            },
+                            onClick = {
+                                onToggleTheme()
+                                showMenu = false
+                            }
+                        )
+                        DropdownMenuItem(
+                            text = {
+                                Row(verticalAlignment = Alignment.CenterVertically) {
+                                    Icon(
                                         imageVector = Icons.Default.Info,
                                         contentDescription = null,
                                         tint = MaterialTheme.colorScheme.primary
@@ -95,22 +126,6 @@ fun MainScreen(navController: NavController) {
                                 showMenu = false
                                 navController.navigate(Screen.About.route)
                             }
-                        )
-                        DropdownMenuItem(
-                            text = {
-                                Row(verticalAlignment = Alignment.CenterVertically) {
-                                    Icon(
-                                        imageVector = Icons.Default.Share,
-                                        contentDescription = null,
-                                        tint = MaterialTheme.colorScheme.primary
-                                    )
-                                    Text(
-                                        text = stringResource(R.string.bagikan),
-                                        modifier = Modifier.padding(start = 8.dp)
-                                    )
-                                }
-                            },
-                            onClick = { showMenu = false },
                         )
                     }
                 },
@@ -169,7 +184,8 @@ fun ScreenContent(modifier: Modifier = Modifier) {
     var kebutuhanAir by remember { mutableIntStateOf(0) }
 
     Column(
-        modifier = modifier.fillMaxSize()
+        modifier = modifier
+            .fillMaxSize()
             .verticalScroll(rememberScrollState())
             .padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp),
@@ -335,45 +351,81 @@ fun ScreenContent(modifier: Modifier = Modifier) {
                 }
             }
         }
-        Button(
-            onClick = {
-                beratError = (berat == "" || berat == "0")
-                usiaError = usia.isBlank()
-                aktivitasError = aktivitas.isBlank()
-                cuacaError = cuaca.isBlank()
-
-                if (beratError || usiaError || aktivitasError || cuacaError) return@Button
-
-                val beratInt = berat.toIntOrNull() ?: 0
-
-                kebutuhanAir = hitungKebutuhanAir(
-                    beratInt,
-                    gender,
-                    usia,
-                    aktivitas,
-                    cuaca
-                )
-            },
-            modifier = Modifier.padding(top = 10.dp),
-            contentPadding = PaddingValues(horizontal = 32.dp, vertical = 16.dp)
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 10.dp),
+            horizontalArrangement = Arrangement.spacedBy(12.dp, Alignment.CenterHorizontally)
         ) {
-            Text(text = stringResource(R.string.hitung))
+            Button(
+                onClick = {
+                    beratError = (berat == "" || berat == "0")
+                    usiaError = usia.isBlank()
+                    aktivitasError = aktivitas.isBlank()
+                    cuacaError = cuaca.isBlank()
+
+                    if (beratError || usiaError || aktivitasError || cuacaError) return@Button
+
+                    val beratInt = berat.toIntOrNull() ?: 0
+
+                    kebutuhanAir = hitungKebutuhanAir(
+                        beratInt,
+                        gender,
+                        usia,
+                        aktivitas,
+                        cuaca
+                    )
+                },
+                contentPadding = PaddingValues(horizontal = 32.dp, vertical = 16.dp)
+            ) {
+                Text(text = stringResource(R.string.hitung))
+            }
+
+            Button(
+                onClick = {
+                    berat = ""
+                    usia = ""
+                    aktivitas = ""
+                    cuaca = ""
+                    kebutuhanAir = 0
+
+                    beratError = false
+                    usiaError = false
+                    aktivitasError = false
+                    cuacaError = false
+                },
+                contentPadding = PaddingValues(horizontal = 32.dp, vertical = 16.dp),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = MaterialTheme.colorScheme.secondaryContainer,
+                    contentColor = MaterialTheme.colorScheme.onSecondaryContainer
+                )
+            ) {
+                Text(text = stringResource(R.string.reset))
+            }
         }
 
         if (kebutuhanAir != 0) {
+            Spacer(modifier = Modifier.height(16.dp))
+
             HorizontalDivider(
-                modifier = Modifier.padding(vertical = 8.dp),
+                modifier = Modifier.fillMaxWidth(),
                 thickness = 1.dp
             )
+
             Text(
                 text = "Kebutuhan air minum Anda adalah:",
-                style = MaterialTheme.typography.titleMedium
+                style = MaterialTheme.typography.titleMedium,
+                modifier = Modifier.padding(top = 12.dp)
             )
+
             Text(
                 text = "$kebutuhanAir ml per hari",
-                style = MaterialTheme.typography.headlineLarge
+                style = MaterialTheme.typography.headlineLarge,
+                modifier = Modifier.padding(top = 8.dp)
             )
         }
+
+
     }
 }
 
@@ -456,6 +508,9 @@ fun ErrorHint(isError: Boolean) {
 @Composable
 fun MainScreenPreview() {
     HydroCalcTheme {
-        MainScreen(rememberNavController())
+        MainScreen(rememberNavController(),
+            isDarkTheme = false,
+            onToggleTheme = {}
+        )
     }
 }

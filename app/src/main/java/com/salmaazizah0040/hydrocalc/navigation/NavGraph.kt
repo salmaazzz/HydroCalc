@@ -10,7 +10,10 @@ import com.salmaazizah0040.hydrocalc.ui.screen.MainScreen
 import com.salmaazizah0040.hydrocalc.ui.screen.SplashScreen
 
 @Composable
-fun SetupNavGraph(navController: NavHostController = rememberNavController()) {
+fun SetupNavGraph(navController: NavHostController = rememberNavController(),
+                  isDarkTheme: Boolean,
+                  onToggleTheme: () -> Unit
+) {
     NavHost(
         navController = navController,
         startDestination = Screen.Splash.route
@@ -19,7 +22,7 @@ fun SetupNavGraph(navController: NavHostController = rememberNavController()) {
             SplashScreen(navController)
         }
         composable(route = Screen.Home.route) {
-            MainScreen(navController)
+            MainScreen(navController, isDarkTheme, onToggleTheme)
         }
         composable(route = Screen.About.route) {
             AboutScreen(navController)
