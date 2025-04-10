@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">HydroCalc</string>
+    <string name="hydrocalc_intro">Hitung Kebutuhan Air Minum Kamu!\nMasukkan data dirimu!</string>
+    <string name="berat_badan">Berat badan</string>
+    <string name="jenis_kelamin">Jenis kelamin</string>
+    <string name="pria">Pria</string>
+    <string name="wanita">Wanita</string>
+    <string name="usia">Usia</string>
+    <string name="aktivitas_fisik">Aktivitas fisik</string>
+    <string name="cuaca">Cuaca</string>
+
+    <string name="rentang1" tools:ignore="TypographyDashes">1-3 tahun</string>
+    <string name="rentang2" tools:ignore="TypographyDashes">4-8 tahun</string>
+    <string name="rentang3" tools:ignore="TypographyDashes">9-13 tahun</string>
+    <string name="rentang4" tools:ignore="TypographyDashes">14-18 tahun</string>
+    <string name="rentang5" tools:ignore="TypographyDashes">19-29 tahun</string>
+    <string name="rentang6" tools:ignore="TypographyDashes">30-49 tahun</string>
+    <string name="rentang7" tools:ignore="TypographyDashes">50-64 tahun</string>
+    <string name="rentang8" tools:ignore="TypographyDashes">65 tahun ke atas</string>
+
+    <string name="ringan">Ringan</string>
+    <string name="sedang">Sedang</string>
+    <string name="berat">Berat</string>
+    <string name="panas">Panas</string>
+    <string name="normal">Normal</string>
+    <string name="dingin">Dingin</string>
+    <string name="hitung">Hitung</string>
+    <string name="kebutuhan_air_label">Kebutuhan air minum Anda adalah:</string>
+    <string name="kebutuhan_air_jumlah">%1$d ml per hari</string>
+    <string name="reset">Reset</string>
+
+    <string name="usia_error">Usia belum dipilih.</string>
+    <string name="aktivitas_error">Aktivitas belum dipilih.</string>
+    <string name="cuaca_error">Cuaca belum dipilih.</string>
+
+    <string name="input_invalid">Tidak boleh kosong.</string>
+
+    <string name="menu">Menu</string>
+    <string name="mode_terang">Mode Terang</string>
+    <string name="mode_gelap">Dark mode</string>
+    <string name="kembali">Kembali</string>
+
+    <string name="tentang_aplikasi">Tentang Aplikasi</string>
+    <string name="label_aplikasi">HydroCalc</string>
+    <string name="label_versi">Versi 1.0</string>
+    <string name="tentang_isi">HydroCalc adalah aplikasi sederhana yang membantu kamu menghitung kebutuhan air
+        minum harian berdasarkan data pribadi seperti berat badan dan aktivitas fisik. Dengan tampilan antarmuka
+        yang ringan dan mudah digunakan, HydroCalc dirancang untuk meningkatkan kesadaran pentingnya hidrasi demi
+        kesehatan tubuh.\n\nAplikasi ini dikembangkan sebagai bagian dari mini project mata kuliah Pemrograman untuk
+        Perangkat Bergerak 1.</string>
+    <string name="copyright">\nHak Cipta © 2025 HydroCalc – Salma Azizah. Seluruh hak dilindungi.</string>
+
+    <string name="bagikan">Bagikan</string>
+    <string name="bagikan_template">Berat badan: %1$s kg\nJenis kelamin: %2$s\nUsia: %3$s\nAktivitas fisik: %4$s\nCuaca: %5$s\n\nKebutuhan air minum Anda adalah: %6$d ml per hari</string>
+
+    <string name="tips_hidup_sehat">Tips Hidup Sehat</string>
+    <string name="tips_intro">Berikut adalah beberapa tips untuk menjaga tubuh tetap sehat dan terhidrasi:</string>
+    <string name="tips_1">Minumlah air putih minimal 8 gelas sehari.</string>
+    <string name="tips_2">Konsumsi buah dan sayur yang kaya air seperti semangka, mentimun, dan jeruk.</string>
+    <string name="tips_3">Kurangi minuman berkafein dan beralkohol yang dapat menyebabkan dehidrasi.</string>
+    <string name="tips_4">Perhatikan warna urin: urin yang jernih menandakan hidrasi yang cukup.</string>
+    <string name="tips_5">Minum air secara berkala, jangan tunggu sampai haus.</string>
+    <string name="tips_6">Gunakan aplikasi penghitung kebutuhan air minum mu seperti HydroCalc.</string>
+    <string name="tips_penutup">Tetap sehat dan jaga kebutuhan cairan harianmu!</string>
+
+</resources>

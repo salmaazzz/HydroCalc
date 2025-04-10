@@ -9,8 +9,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.navigation.compose.rememberNavController
-import com.salmaazizah0040.hydrocalc.navigation.SetupNavGraph
 import com.salmaazizah0040.hydrocalc.ui.theme.HydroCalcTheme
+import com.salmaazizah0040.hydrocalc.navigation.SetupNavGraph
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -62,9 +62,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.salmaazizah0040.hydrocalc.ui.theme.HydroCalcTheme
 import com.salmaazizah0040.hydrocalc.R
 import com.salmaazizah0040.hydrocalc.navigation.Screen
-import com.salmaazizah0040.hydrocalc.ui.theme.HydroCalcTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -283,7 +283,7 @@ fun ScreenContent(modifier: Modifier = Modifier) {
                     .fillMaxWidth(),
                 supportingText = {
                     if (usiaError) {
-                        Text("Usia belum dipilih.", color = MaterialTheme.colorScheme.error)
+                        Text(stringResource(R.string.usia_error), color = MaterialTheme.colorScheme.error)
                     }
                 }
             )
@@ -322,7 +322,7 @@ fun ScreenContent(modifier: Modifier = Modifier) {
                     .fillMaxWidth(),
                 supportingText = {
                     if (aktivitasError) {
-                        Text("Aktivitas belum dipilih.", color = MaterialTheme.colorScheme.error)
+                        Text(stringResource(R.string.aktivitas_error), color = MaterialTheme.colorScheme.error)
                     }
                 }
             )
@@ -361,7 +361,7 @@ fun ScreenContent(modifier: Modifier = Modifier) {
                     .fillMaxWidth(),
                 supportingText = {
                     if (cuacaError) {
-                        Text("Cuaca belum dipilih.", color = MaterialTheme.colorScheme.error)
+                        Text(stringResource(R.string.cuaca_error), color = MaterialTheme.colorScheme.error)
                     }
                 }
             )
@@ -403,7 +403,8 @@ fun ScreenContent(modifier: Modifier = Modifier) {
                         gender,
                         usia,
                         aktivitas,
-                        cuaca
+                        cuaca,
+                        context
                     )
                 },
                 contentPadding = PaddingValues(horizontal = 32.dp, vertical = 16.dp)
@@ -441,16 +442,19 @@ fun ScreenContent(modifier: Modifier = Modifier) {
                 modifier = Modifier.fillMaxWidth(),
                 thickness = 1.dp
             )
+
             Text(
-                text = "Kebutuhan air minum Anda adalah:",
+                text = stringResource(R.string.kebutuhan_air_label),
                 style = MaterialTheme.typography.titleMedium,
                 modifier = Modifier.padding(top = 12.dp)
             )
+
             Text(
-                text = "$kebutuhanAir ml per hari",
+                text = stringResource(R.string.kebutuhan_air_jumlah, kebutuhanAir),
                 style = MaterialTheme.typography.headlineLarge,
                 modifier = Modifier.padding(top = 8.dp)
             )
+
             Button(
                 onClick = {
                     shareDate(
@@ -495,17 +499,26 @@ fun hitungKebutuhanAir(
     gender: String,
     usia: String,
     aktivitas: String,
-    cuaca: String
+    cuaca: String,
+    context: Context
 ): Int {
+    val ringan = context.getString(R.string.ringan)
+    val sedang = context.getString(R.string.sedang)
+    val beratAkt = context.getString(R.string.berat)
+    val dingin = context.getString(R.string.dingin)
+    val normal = context.getString(R.string.normal)
+    val panas = context.getString(R.string.panas)
+
     // dasar kebutuhan air berdasarkan usia dan gender
     var kebutuhan: Float = when (usia) {
-        "1-3 tahun" -> 900f
-        "4-8 tahun" -> 1400f
-        "9-13 tahun" -> if (gender == "Pria") 2200f else 1800f
-        "14-18 tahun" -> if (gender == "Pria") 2700f else 2000f
-        "19-29 tahun", "30-49 tahun" -> if (gender == "Pria") 2500f else 2350f
-        "50-64 tahun" -> if (gender == "Pria") 2500f else 2300f
-        "65 tahun ke atas" -> if (gender == "Pria") 2100f else 1900f
+        context.getString(R.string.rentang1) -> 900f
+        context.getString(R.string.rentang2) -> 1400f
+        context.getString(R.string.rentang3) -> if (gender == context.getString(R.string.pria)) 2200f else 1800f
+        context.getString(R.string.rentang4) -> if (gender == context.getString(R.string.pria)) 2700f else 2000f
+        context.getString(R.string.rentang5),
+        context.getString(R.string.rentang6) -> if (gender == context.getString(R.string.pria)) 2500f else 2350f
+        context.getString(R.string.rentang7) -> if (gender == context.getString(R.string.pria)) 2500f else 2300f
+        context.getString(R.string.rentang8) -> if (gender == context.getString(R.string.pria)) 2100f else 1900f
         else -> 0f
     }
 
@@ -516,17 +529,17 @@ fun hitungKebutuhanAir(
 
     // penyesuaian aktivitas fisik
     kebutuhan *= when (aktivitas) {
-        "Ringan" -> 1.0f
-        "Sedang" -> 1.10f
-        "Berat" -> 1.20f
+        ringan -> 1.0f
+        sedang -> 1.10f
+        beratAkt -> 1.20f
         else -> 1.0f
     }
 
     // penyesuaian cuaca
     kebutuhan *= when (cuaca) {
-        "Dingin" -> 0.95f
-        "Normal" -> 1.0f
-        "Panas" -> 1.10f
+        dingin -> 0.95f
+        normal -> 1.0f
+        panas -> 1.10f
         else -> 1.0f
     }
 

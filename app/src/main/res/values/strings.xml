@@ -1,57 +1,64 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">HydroCalc</string>
-    <string name="hydrocalc_intro">Hitung Kebutuhan Air Minum\nMasukkan data dirimu!</string>
-    <string name="berat_badan">Berat badan</string>
-    <string name="jenis_kelamin">Jenis kelamin</string>
-    <string name="usia">Usia</string>
-    <string name="aktivitas_fisik">Aktivitas fisik</string>
-    <string name="cuaca">Cuaca</string>
-    <string name="pria">Pria</string>
-    <string name="wanita">Wanita</string>
+    <string name="hydrocalc_intro">Calculate Your Daily Water Needs!\nEnter your personal data!</string>
+    <string name="berat_badan">Body weight</string>
+    <string name="jenis_kelamin">Gender</string>
+    <string name="pria">Male</string>
+    <string name="wanita">Female</string>
+    <string name="usia">Age</string>
+    <string name="aktivitas_fisik">Physical activity</string>
+    <string name="cuaca">Weather</string>
 
-    <string name="rentang1" tools:ignore="TypographyDashes">1-3 tahun</string>
-    <string name="rentang2" tools:ignore="TypographyDashes">4-8 tahun</string>
-    <string name="rentang3" tools:ignore="TypographyDashes">9-13 tahun</string>
-    <string name="rentang4" tools:ignore="TypographyDashes">14-18 tahun</string>
-    <string name="rentang5" tools:ignore="TypographyDashes">19-29 tahun</string>
-    <string name="rentang6" tools:ignore="TypographyDashes">30-49 tahun</string>
-    <string name="rentang7" tools:ignore="TypographyDashes">50-64 tahun</string>
-    <string name="rentang8" tools:ignore="TypographyDashes">65 tahun ke atas</string>
+    <string name="rentang1" tools:ignore="TypographyDashes">1–3 years old</string>
+    <string name="rentang2" tools:ignore="TypographyDashes">4-8 years old</string>
+    <string name="rentang3" tools:ignore="TypographyDashes">9-13 years old</string>
+    <string name="rentang4" tools:ignore="TypographyDashes">14-18 years old</string>
+    <string name="rentang5" tools:ignore="TypographyDashes">19-29 years old</string>
+    <string name="rentang6" tools:ignore="TypographyDashes">30-49 years old</string>
+    <string name="rentang7" tools:ignore="TypographyDashes">50-64 years old</string>
+    <string name="rentang8" tools:ignore="TypographyDashes">65 years old and above</string>
 
-    <string name="ringan">Ringan</string>
-    <string name="sedang">Sedang</string>
-    <string name="berat">Berat</string>
-    <string name="panas">Panas</string>
-    <string name="normal">Normal</string>
-    <string name="dingin">Dingin</string>
-    <string name="hitung">Hitung</string>
+    <string name="ringan">Light activity</string>
+    <string name="sedang">Moderate activity</string>
+    <string name="berat">Heavy activity</string>
+    <string name="panas">Hot weather</string>
+    <string name="normal">Normal weather</string>
+    <string name="dingin">Cold weather</string>
+    <string name="hitung">Calculate</string>
+    <string name="kebutuhan_air_label">Your daily water intake requirement is:</string>
+    <string name="kebutuhan_air_jumlah">%1$d ml per day</string>
     <string name="reset">Reset</string>
 
-    <string name="input_invalid">Tidak boleh kosong.</string>
+    <string name="usia_error">Age not selected.</string>
+    <string name="aktivitas_error">Activity not selected.</string>
+    <string name="cuaca_error">Weather not selected.</string>
+
+    <string name="input_invalid">This field cannot be empty.</string>
 
     <string name="menu">Menu</string>
-    <string name="mode_terang">Mode Terang</string>
-    <string name="mode_gelap">Mode Gelap</string>
-    <string name="kembali">Kembali</string>
+    <string name="mode_terang">Light mode</string>
+    <string name="mode_gelap">Dark mode</string>
+    <string name="kembali">Back</string>
 
-    <string name="tentang_aplikasi">Tentang Aplikasi</string>
-    <string name="copyright">HydroCalc adalah aplikasi sederhana yang membantu kamu menghitung kebutuhan air minum harian berdasarkan data pribadi seperti
-        berat badan dan aktivitas fisik. Dengan tampilan antarmuka yang ringan dan mudah digunakan, HydroCalc dirancang untuk meningkatkan kesadaran pentingnya
-        hidrasi demi kesehatan tubuh.\n\nAplikasi ini dikembangkan sebagai bagian dari mini project mata kuliah Pemrograman untuk Perangkat Bergerak 1.
-        \n\nCopyright © 2025 HydroCalc - Salma Azizah.\nAll rights reserved.</string>
+    <string name="tentang_aplikasi">About the App</string>
+    <string name="label_aplikasi">HydroCalc</string>
+    <string name="label_versi">Version 1.0</string>
+    <string name="tentang_isi">HydroCalc is a simple application that helps you calculate your daily water intake needs based on personal data such as body weight and physical activity.
+        With a lightweight and user-friendly interface, HydroCalc is designed to raise awareness about the importance of hydration for overall health.\n\nThis app was developed as part of
+        a mini project for the Mobile Programming 1 course.</string>
+    <string name="copyright">\nCopyright © 2025 HydroCalc - Salma Azizah. All rights reserved.</string>
 
-    <string name="bagikan">Bagikan</string>
-    <string name="bagikan_template">Berat badan: %1$s kg\nJenis kelamin: %2$s\nUsia: %3$s\nAktivitas fisik: %4$s\nCuaca: %5$s\n\nKebutuhan air minum
-        Anda adalah: %6$d ml per hari</string>
+    <string name="bagikan">Share</string>
+    <string name="bagikan_template">Weight: %1$s kg\nGender: %2$s\nAge: %3$s\nPhysical activity level: %4$s\nWeather condition: %5$s\n\nYour recommended daily water intake is: %6$d ml</string>
 
-    <string name="tips_hidup_sehat">Tips Hidup Sehat</string>
-    <string name="tips_isi">Berikut adalah beberapa tips untuk menjaga tubuh tetap sehat dan terhidrasi:\n
-        1. Minumlah air putih minimal 8 gelas sehari.\n
-        2. Konsumsi buah dan sayur yang kaya air seperti semangka, mentimun, dan jeruk.\n
-        3. Kurangi minuman berkafein dan beralkohol yang dapat menyebabkan dehidrasi.\n
-        4. Perhatikan warna urin: urin yang jernih menandakan hidrasi yang cukup.\n
-        5. Minum air secara berkala, jangan tunggu sampai haus.\n
-        6. Gunakan aplikasi pengingat minum air seperti HydroCalc.\n
-        Tetap sehat dan jaga kebutuhan cairan harianmu!
-    </string>
+    <string name="tips_hidup_sehat">Healthy Living Tips</string>
+    <string name="tips_intro">Here are some tips to keep your body healthy and hydrated:</string>
+    <string name="tips_1">Drink at least 8 glasses of water a day.</string>
+    <string name="tips_2">Consume fruits and vegetables rich in water, such as watermelon, cucumber, and oranges.</string>
+    <string name="tips_3">Reduce caffeinated and alcoholic beverages that can cause dehydration.</string>
+    <string name="tips_4">Pay attention to urine color: clear urine indicates proper hydration.</string>
+    <string name="tips_5">Drink water regularly, don’t wait until you’re thirsty.</string>
+    <string name="tips_6">Use a water intake calculator app like HydroCalc.</string>
+    <string name="tips_penutup">Stay healthy and maintain your daily hydration needs!</string>
+
 </resources>

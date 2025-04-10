@@ -2,6 +2,8 @@ package com.salmaazizah0040.hydrocalc.ui.screen
 
 import android.content.res.Configuration
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -19,13 +21,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import com.salmaazizah0040.hydrocalc.R
 import com.salmaazizah0040.hydrocalc.ui.theme.HydroCalcTheme
+import com.salmaazizah0040.hydrocalc.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AboutScreen(navController: NavHostController) {
-
     Scaffold(
         topBar = {
             TopAppBar(
@@ -48,10 +49,34 @@ fun AboutScreen(navController: NavHostController) {
             )
         }
     ) { innerPadding ->
-        Text(
-            text = stringResource(R.string.copyright),
-            modifier = Modifier.padding(innerPadding).padding(16.dp)
-        )
+        androidx.compose.foundation.layout.Column(
+            modifier = Modifier
+                .padding(innerPadding)
+                .padding(24.dp)
+                .verticalScroll(rememberScrollState())
+        ) {
+            Text(
+                text = stringResource(R.string.label_aplikasi),
+                style = MaterialTheme.typography.headlineSmall,
+                color = MaterialTheme.colorScheme.primary
+            )
+            Text(
+                text = stringResource(R.string.label_versi),
+                style = MaterialTheme.typography.labelMedium,
+                color = MaterialTheme.colorScheme.onBackground,
+                modifier = Modifier.padding(bottom = 16.dp)
+            )
+            Text(
+                text = stringResource(R.string.tentang_isi),
+                style = MaterialTheme.typography.bodyLarge,
+                modifier = Modifier.padding(bottom = 12.dp)
+            )
+            Text(
+                text = stringResource(R.string.copyright),
+                style = MaterialTheme.typography.labelSmall,
+                color = MaterialTheme.colorScheme.outline
+            )
+        }
     }
 }
 
